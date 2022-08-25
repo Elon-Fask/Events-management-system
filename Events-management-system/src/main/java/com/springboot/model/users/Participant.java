@@ -1,4 +1,4 @@
-package com.springboot.webapp.model.user;
+package com.springboot.model.users;
 
 import java.util.List;
 
@@ -7,30 +7,36 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.springboot.model.Activity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import com.springboot.webapp.model.Activity;
-
 @Entity
-@Table(name = "Participant")
+@Table(name = "participant")
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Participant  extends User{
+public class Participant extends User{
 	private static final long serialVersionUID = 1L;
-
-	@Column(name = "Domaine")
-	private String Domaine;
-
-	@Column(name = "Structure")
-	private String Structure;
+	
+	@NotBlank
+	@Column(name = "domaine")
+	private String demaine;
+	
+	@NotBlank
+	@Column(name = "structure")
+	private String structure;
 	
 	@ManyToMany(mappedBy = "participant", fetch = FetchType.EAGER)
-	private List<Activity> activite;
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Activity> activity;
+	
 }
-

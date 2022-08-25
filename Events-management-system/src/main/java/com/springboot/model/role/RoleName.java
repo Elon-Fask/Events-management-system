@@ -1,8 +1,8 @@
-package com.springboot.webapp.model.role;
+package com.springboot.model.role;
 
 public enum RoleName {
 
-	ROLE_USER,
 	ROLE_ADMIN,
+	ROLE_USER,
 	ROLE_RESPONSIBLE,
 }
